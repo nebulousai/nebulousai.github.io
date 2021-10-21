@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Stellar.ai</title>
+		<title>Nebulous.ai</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -15,22 +15,22 @@
 
 		<!-- Header -->
 			<header id="header">
-				<h1>Stellar.ai</h1>
+				<h1>Nebulous.ai</h1>
 				<p>Quality data for you and your clients to make better decisions with. <br />
 				Coming soon. <a href="slides.html">Learn more</a></p>
 			</header>
 
 		<!-- Signup Form -->
-			<form id="signup-form" method="post" onSubmit="WriteToFile(this)">
+			<form id="signup-form">
 				<input type="email" name="email" id="email" placeholder="Email Address" />
-				<input type="submit" value="Join the wait list" />
+				<input type="submit" id="submit-form" value="Join the wait list" />
 			</form>
 
 		<!-- Footer -->
 			<footer id="footer">
 				<ul class="icons">
 					<li><a href="https://www.linkedin.com/in/sarthakrastogi/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-					<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+					<li><a href="https://www.github.com/nebulousai/" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
 					<li><a href="mailto:sarthak_rastogi@icloud.com" class="icon fa-envelope"><span class="label">Email</span></a></li>
 				</ul>
 				<ul class="copyright">
@@ -41,20 +41,21 @@
 		<!-- Scripts -->
 			<script src="assets/js/main.js"></script>
 			<script>
-					function WriteToFile(passForm) {
+							var $form = $('form#signup-form'),
+				    url = 'https://script.google.com/macros/s/AKfycbwykPaNVNkRbIF23MeepnAfV4jbhwpCbtDLz11fBx0KFTssss_B_70wQV7y4VPpQGAL/exec'
 
-		    set fso = CreateObject("Scripting.FileSystemObject");
-		    set s   = fso.CreateTextFile("/emails.txt", True);
-
-		    var email = document.getElementById('email');
-
-		    s.writeline(email);
-
-		    s.writeline("-----------------------------");
-		    s.Close();
-		 }
-		 </script>
-
+				$('#submit-form').on('click', function(e) {
+				  e.preventDefault();
+				  var jqxhr = $.ajax({
+				    url: url,
+				    method: "GET",
+				    dataType: "json",
+				    data: $form.serializeObject()
+				  }).success(
+				    // do something
+				  );
+				})
+				</script>
 
 	</body>
 </html>
